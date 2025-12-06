@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethical Hacking Tips - सुरक्षा के गुर</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #0c0c0c;
+            --secondary: #00ff41;
+            --accent: #008f11;
+            --dark-bg: #111;
+            --card-bg: #1a1a1a;
+            --text: #f0f0f0;
+            --text-secondary: #aaa;
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 65, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 143, 17, 0.05) 0%, transparent 20%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid var(--accent);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 2.2rem;
+            filter: drop-shadow(0 0 5px var(--secondary));
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 3px;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+            background-color: rgba(0, 255, 65, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--secondary), #00cc33);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--text-secondary);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 14px 32px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid var(--secondary);
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--secondary);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 60px 0;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+        }
+
+        /* Tips Section */
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .tip-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 65, 0.1);
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .tip-img {
+            height: 180px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .tip-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .tip-card:hover .tip-img img {
+            transform: scale(1.05);
+        }
+
+        .tip-content {
+            padding: 25px;
+        }
+
+        .tip-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--secondary);
+        }
+
+        .tip-content p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .tip-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 65, 0.1);
+        }
+
+        .sidebar-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--secondary);
+        }
+
+        .sidebar-list {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .sidebar-list li {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar-list li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-list a {
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+
+        .sidebar-list a:hover {
+            color: var(--secondary);
+        }
+
+        .sidebar-list i {
+            color: var(--accent);
+        }
+
+        .ethical-info {
+            background-color: rgba(0, 255, 65, 0.05);
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 25px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .ethical-info h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .ethical-info p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .ethical-info ul {
+            padding-left: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .ethical-info li {
+            margin-bottom: 8px;
+        }
+
+        .note-box {
+            background-color: rgba(0, 255, 65, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 30px;
+        }
+
+        .note-box h4 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Social Links Section */
+        .social-links {
+            background-color: var(--dark-bg);
+            padding: 60px 0;
+            margin-top: 40px;
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+        }
+
+        .social-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .social-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            color: var(--secondary);
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .social-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 35px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 65, 0.1);
+            transition: all 0.3s;
+        }
+
+        .social-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-icon {
+            font-size: 3.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .social-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .social-card p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .social-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: 2px solid var(--secondary);
+        }
+
+        .social-button:hover {
+            background-color: transparent;
+            color: var(--secondary);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+        }
+
+        .youtube-button {
+            background-color: #FF0000;
+            border-color: #FF0000;
+        }
+
+        .youtube-button:hover {
+            color: #FF0000;
+            background-color: transparent;
+        }
+
+        .instagram-button {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            border: none;
+        }
+
+        .instagram-button:hover {
+            background: transparent;
+            color: #E1306C;
+            border: 2px solid #E1306C;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid var(--accent);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div>
+                    <div class="logo-text">ETHICAL HACKER</div>
+                    <div class="tagline">सुरक्षा ज्ञान, सुरक्षित डिजिटल दुनिया</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> होम</a></li>
+                    <li><a href="#"><i class="fas fa-graduation-cap"></i> टिप्स</a></li>
+                    <li><a href="#"><i class="fas fa-tools"></i> टूल्स</a></li>
+                    <li><a href="#"><i class="fas fa-book"></i> संसाधन</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> संपर्क</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>एथिकल हैकिंग टिप्स एवं गाइड</h1>
+            <p>सुरक्षा विशेषज्ञों द्वारा सत्यापित हैकिंग तकनीकें जो आपकी सिस्टम सुरक्षा को मजबूत बनाएंगी। कानूनी और नैतिक हैकिंग ज्ञान से अपने डिजिटल अस्तित्व की सुरक्षा करें।</p>
+            <a href="#tips" class="cta-button">टिप्स देखें <i class="fas fa-arrow-down"></i></a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Tips Section -->
+        <main>
+            <h2 class="section-title" id="tips">एथिकल हैकिंग के महत्वपूर्ण टिप्स</h2>
+            <div class="tips-grid">
+                <!-- Tip 1 -->
+                <div class="tip-card">
+                    <div class="tip-img">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Password Security">
+                    </div>
+                    <div class="tip-content">
+                        <div class="tip-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <h3>मजबूत पासवर्ड नीतियाँ</h3>
+                        <p>कमजोर पासवर्ड हैकर्स का पहला निशाना होते हैं। हमेशा लंबे, जटिल पासवर्ड बनाएं और पासवर्ड मैनेजर का उपयोग करें।</p>
+                    </div>
+                </div>
+
+                <!-- Tip 2 -->
+                <div class="tip-card">
+                    <div class="tip-img">
+                        <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Network Security">
+                    </div>
+                    <div class="tip-content">
+                        <div class="tip-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3>नेटवर्क सुरक्षा जाँच</h3>
+                        <p>अपने नेटवर्क की नियमित सुरक्षा ऑडिट करें। अनधिकृत एक्सेस और कमजोर पॉइंट्स की पहचान कर उन्हें ठीक करें।</p>
+                    </div>
+                </div>
+
+                <!-- Tip 3 -->
+                <div class="tip-card">
+                    <div class="tip-img">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Phishing Awareness">
+                    </div>
+                    <div class="tip-content">
+                        <div class="tip-icon">
+                            <i class="fas fa-fish"></i>
+                        </div>
+                        <h3>फिशिंग हमलों से सावधानी</h3>
+                        <p>अनजान ईमेल, लिंक और अटैचमेंट्स पर क्लिक न करें। फिशिंग हमले साइबर सुरक्षा के लिए सबसे बड़ा खतरा हैं।</p>
+                    </div>
+                </div>
+
+                <!-- Tip 4 -->
+                <div class="tip-card">
+                    <div class="tip-img">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Software Updates">
+                    </div>
+                    <div class="tip-content">
+                        <div class="tip-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>नियमित सॉफ्टवेयर अपडेट</h3>
+                        <p>सभी सॉफ्टवेयर और ऑपरेटिंग सिस्टम को अपडेट रखें। अधिकांश हैक पुराने सॉफ़्टवेयर की कमजोरियों का फायदा उठाते हैं।</p>
+                    </div>
+                </div>
+
+                <!-- Tip 5 -->
+                <div class="tip-card">
+                    <div class="tip-img">
+                        <img src="https://images.unsplash.com/photo-1590658165737-15a047b8b5e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Encryption">
+                    </div>
+                    <div class="tip-content">
+                        <div class="tip-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>डेटा एन्क्रिप्शन</h3>
+                        <p>संवेदनशील डेटा को हमेशा एन्क्रिप्ट करके रखें। ट्रांसमिशन और स्टोरेज दोनों समय डेटा एन्क्रिप्शन जरूरी है।</p>
+                    </div>
+                </div>
+
+                <!-- Tip 6 -->
+                <div class="tip-card">
+                    <div class="tip-img">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Two Factor Authentication">
+                    </div>
+                    <div class="tip-content">
+                        <div class="tip-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h3>दो-चरणीय प्रमाणीकरण</h3>
+                        <p>2FA सक्षम करें। यह सुरक्षा की एक अतिरिक्त परत जोड़ता है और अनधिकृत पहुंच को रोकता है।</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> महत्वपूर्ण नोट</h4>
+                <p>एथिकल हैकिंग केवल कानूनी अनुमति वाले सिस्टम पर ही की जानी चाहिए। बिना अनुमति के किसी के सिस्टम में घुसपैठ करना गैरकानूनी है और इसके गंभीर कानूनी परिणाम हो सकते हैं। हमेशा लिखित अनुमति (पेन टेस्ट अनुबंध) के बाद ही सुरक्षा परीक्षण करें।</p>
+            </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3 class="sidebar-title">त्वरित लिंक</h3>
+            <ul class="sidebar-list">
+                <li><a href="#"><i class="fas fa-download"></i> हैकिंग टूल्स</a></li>
+                <li><a href="#"><i class="fas fa-video"></i> ट्यूटोरियल वीडियो</a></li>
+                <li><a href="#"><i class="fas fa-file-certificate"></i> सर्टिफिकेशन कोर्स</a></li>
+        
